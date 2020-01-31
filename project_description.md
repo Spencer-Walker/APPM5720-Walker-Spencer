@@ -63,4 +63,4 @@ The parallelization strategy im using right now is to stick to one node and use 
 
 Once I have this toy model completed I will extend it to higher dimensional problems for both the wave propagation and Schrodinger solver. The many year goal is to use TDDFT for many electron systems for each subdomain and study high-density gas lasers and extend to HHG in solids. 
 
-I plan on spending 20+ hours on this a week. 
+I plan on spending 20 hours on this a week. 
