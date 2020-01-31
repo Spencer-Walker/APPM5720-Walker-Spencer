@@ -106,4 +106,4 @@ I also would probably avoid using fortran's IO just import HDF5 and use that. Th
 
 Also parfor the inner loop. The solver is explicit and its a speedup for free. 
 
-In terms of accuracy just use a higher order method. 
+In terms of accuracy just use a higher order method.
