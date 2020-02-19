@@ -1,4 +1,5 @@
 #include <iostream>
+
 #include "Darray.h"
 
 using namespace std;
@@ -8,44 +9,35 @@ bool Darray::m_corder = false;
 
 // Constructors
 //-----------------------------------------------------------------------
-/**
- * Constructor for arbituary physical indicies and some number of components 
- * at each physical indicies 
-**/
 Darray::Darray( int nc, int ibeg, int iend)
 {
-    m_nc = nc;      // number of rows (components)
-    m_ib = ibeg;    // index of first column (physical index can be negative)
-    m_ie = iend;    // index of last column (physical index )
-    m_ni = m_ie-m_ib+1; // compute the number of columns 
-    if( m_nc*m_ni > 0 ) // check to see if the number of rows/columns make sense
-        m_data = new double[m_nc*m_ni]; // If it makes snse allocate rows*columns
+    m_nc = nc;
+    m_ib = ibeg;
+    m_ie = iend;
+    m_ni = m_ie-m_ib+1;
+    if( m_nc*m_ni > 0 )
+        m_data = new double[m_nc*m_ni];
     else
-        m_data = NULL; // If it doesnt make sense set the pointer to null
-    define_offsets();  // Set offsets such that we can address properly
+        m_data = NULL;
+    define_offsets();
 }
-/**
- * Same as above but assume only one component.
-**/
+// Single variable array
 Darray::Darray(int ibeg, int iend)
 {
-    m_nc = 1;           // number of rows (components).
-    m_ib = ibeg;        // index of first column (physical).
-    m_ie = iend;        // index of last column (physical).
-    m_ni = m_ie-m_ib+1; // number of colums.
-    if( m_nc*m_ni > 0 ) // Check to make the number of rows/columns make sense
-        m_data = new double[m_nc*m_ni]; // Allocate a large 1D array with enough values
+    m_nc = 1;
+    m_ib = ibeg;
+    m_ie = iend;
+    m_ni = m_ie-m_ib+1;
+    if( m_nc*m_ni > 0 )
+        m_data = new double[m_nc*m_ni];
     else
-        m_data = NULL; // If the dimensions dont make sense set the pointer to null
-    define_offsets();  // Set offsets such that we can address properly
+        m_data = NULL;
+    define_offsets();
 }
 
 //-----------------------------------------------------------------------
 
 //Default constructor
-/**
- * By default theres no date everything 0, pointer NULL
-**/
 Darray::Darray()
 {
     m_nc = m_ib = m_ie = 0;
@@ -53,12 +45,8 @@ Darray::Darray()
 }
 
 //
-/**
- * Redefine everything basically the same as our constructor
-**/
 void Darray::define( int nc, int ibeg, int iend)
 {
-    //SAME AS BEFORE 
     if( m_data != NULL )
         delete[] m_data;
 
@@ -73,12 +61,8 @@ void Darray::define( int nc, int ibeg, int iend)
     define_offsets();
 }
 
-/**
- * Redefine everything basically the same as our constructor
-**/
 void Darray::define(int ibeg, int iend)
 {
-    //SAME AS BEFORE 
     if( m_data != NULL )
         delete[] m_data;
 
@@ -96,9 +80,6 @@ void Darray::define(int ibeg, int iend)
 
 
 //-----------------------------------------------------------------------
-/**
- * Set every component to some scalar.
-**/
 void Darray::set_value(double scalar)
 {
     for( size_t i = 0 ; i < m_npts ; i++ )
@@ -106,9 +87,6 @@ void Darray::set_value(double scalar)
 }
 
 //-----------------------------------------------------------------------
-/**
- * Set offsets (physical -> computer indicies)
-**/ 
 void Darray::define_offsets()
 {
     m_npts = static_cast<size_t>(m_ni)*m_nc;
@@ -129,9 +107,6 @@ void Darray::define_offsets()
 }
 
 //-----------------------------------------------------------------------
-/**
- * Delete everything, allocate memeory and set fields to some other array.
-**/
 void Darray::copy( const Darray& u )
 {
     if( m_data != NULL )
