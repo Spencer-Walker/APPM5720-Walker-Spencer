@@ -1,0 +1,32 @@
+#
+# Makefile for  timing examples
+#
+
+CXX = g++
+LD  = g++
+
+CXXINCLUDE = -I../darray
+CXXFLAGS = FFFFFF
+
+OBJECTS = test2D.o
+EXEC = ex.x	
+
+.PHONY: clean
+
+$(EXEC): link $(OBJECTS)
+	$(LD) $(LDFLAGS) $(OBJECTS) -o $(EXEC)
+
+link:
+ifneq (,$(findstring DBZ_DEBUG,$(CXXFLAGS)))
+	$(eval LDFLAGS := -L../darray -ldarray_dbg)
+	echo $(LDFLAGS)
+else
+	$(eval LDFLAGS := -L../darray -ldarray)
+	echo $(LDFLAGS)
+endif		
+
+%.o : %.cpp
+	$(CXX) $(CXXFLAGS) $(CXXINCLUDE) -c $<
+
+clean:
+	rm -f $(OBJECTS) $(EXEC) 
