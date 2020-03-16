@@ -7,8 +7,8 @@ WaveSimulation::WaveSimulation(){
     m_yB = -1.0;
     m_yE =  1.0;
     m_tend = 3.0;
-    m_Nx = 4000;
-    m_Ny = 4000;
+    m_Nx = 400;
+    m_Ny = 400;
     m_CFL = 0.3;
     set_up_arrays();
     set_up_grids();

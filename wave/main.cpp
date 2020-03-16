@@ -7,6 +7,7 @@
 #include "Darrays.h"
 #include "WaveSimulation.h"
 #include <omp.h>
+#include <sstream>
 using namespace std::chrono;
 using namespace std;
 
@@ -33,9 +34,14 @@ int main(int argc, char **argv)
     
     w_sim.m_check_energy = true; // Will print to file and not stdout 
     ofstream energyfile;
-    energyfile.open ("energy.out");
+		stringstream ss;
+		ss << "energy" << n << ".out";
+    energyfile.open (ss.str());
+		ss.str("");
     ofstream timefile;
-    timefile.open ("time.out");
+    ss << "time" << n << ".out";
+		timefile.open (ss.str());
+		ss.str("");
     w_sim.m_tend = 10;
     w_sim.set_n_print(40);        
     
@@ -85,8 +91,10 @@ int main(int argc, char **argv)
     auto stop = high_resolution_clock::now(); 
     auto duration = duration_cast<microseconds>(stop - start);
     ofstream clocktimefile;
-    clocktimefile.open ("clock_time.out");
-    clocktimefile << duration.count();
+		ss << "clock_time" << n << ".out";
+    clocktimefile.open (ss.str());
+    ss.str("");
+		clocktimefile << duration.count();
     clocktimefile.close();
     timefile.close();
     return 0;

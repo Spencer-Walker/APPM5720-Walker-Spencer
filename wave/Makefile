@@ -4,8 +4,8 @@
 
 CXX = g++
 LD  = g++
-SILO_LIB = /Users/appelo/libs/silo/lib
-SILO_INC = /Users/appelo/libs/silo/include
+SILO_LIB = /home/becker/spwa4419/Documents/silo-4.10.2/lib
+SILO_INC = /home/becker/spwa4419/Documents/silo-4.10.2/include
 DARRAY_LIB = ../darray
 DARRAY_INC = ../darray
 LDFLAGS = -L$(SILO_LIB) -lsilo -L$(DARRAY_LIB) -ldarray -lblas -llapack -fopenmp
